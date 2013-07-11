@@ -7,4 +7,4 @@ class RequireJSFilter(Filter):
     def output(self, _in, out, **kwargs):
         out.write(_in.read())
 
-register_filter(RequireJSFilter)        
+register_filter(RequireJSFilter) 
