@@ -12,6 +12,12 @@ config = {
     'version': '0.1',
     'install_requires': ['webassets'],
     'packages': ['webassets_require'],
+    'package_data': {
+        "webassets_require": [
+            "lib/*.jar",
+            "lib/*.js",
+        ]
+    },
     'scripts': [],
     'name': 'webassets-require',
     'license': 'MIT'

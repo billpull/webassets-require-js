@@ -6,7 +6,10 @@ class RequireJSFilter(Filter):
     name = "requireJS"
     
     def output(self, _in, out, **kwargs):
-        raise Exception(_in.read())
-        out.write(RequireOptimizer.run_optimizer(_in.read()))
+    	output_path = kwargs.get('output_path')
+
+    	RequireOptimizer.configure_optimizer(output_path, _in.read())
+
+        out.write(RequireOptimizer.run_optimizer())
 
 register_filter(RequireJSFilter) 

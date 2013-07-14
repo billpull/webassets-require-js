@@ -1,0 +1,15 @@
+setup.py
+webassets_require/RequireOptimizer.py
+webassets_require/__init__.py
+webassets_require.egg-info/PKG-INFO
+webassets_require.egg-info/SOURCES.txt
+webassets_require.egg-info/dependency_links.txt
+webassets_require.egg-info/requires.txt
+webassets_require.egg-info/top_level.txt
+webassets_require/lib/almond.js
+webassets_require/lib/app.build.js
+webassets_require/lib/compiler.jar
+webassets_require/lib/js.jar
+webassets_require/lib/module.build.js
+webassets_require/lib/r.js
+webassets_require/lib/require.js
