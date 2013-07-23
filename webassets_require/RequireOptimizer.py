@@ -2,12 +2,14 @@ import os
 import subprocess
 from webassets.exceptions import FilterError
 
+
 class OptimizationError(Exception):
     pass
 
+
 class RequireOptimizer(object):
-    
-    __REQUIRE_RESOURCES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "lib"))
+    __REQUIRE_RESOURCES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                              "lib"))
 
     @staticmethod
     def _resource_path(file):
@@ -30,19 +32,19 @@ class RequireOptimizer(object):
 
         # Any extra args that should be provided to r.js
         extra_arg_string = ""
-        extra_args = kwargs.get("extra_args",{})
+        extra_args = kwargs.get("extra_args", {})
         for key, value in extra_args.iteritems():
             extra_arg_string += "%s=%s " % (key, value)
 
-        compiler_cmd = "java -classpath %s:%s org.mozilla.javascript.tools.shell.Main %s -o baseUrl=%s name=%s out=%s %s" % (
-                                                RequireOptimizer._resource_path("js.jar"),
-                                                RequireOptimizer._resource_path("compiler.jar"),
-                                                RequireOptimizer._resource_path("r.js"),
-                                                base_url,
-                                                name,
-                                                output_path,
-                                                extra_arg_string
-        )
+        compiler_cmd = "java -classpath {rhino_js_jar}:{closure_compiler_jar} " \
+                        "org.mozilla.javascript.tools.shell.Main {require_js} " \
+                        "-o baseUrl={base_url} name={name} out={require_output_path} {require_extra_args}".format(rhino_js_jar=RequireOptimizer._resource_path("js.jar"),
+                                                                                                                  closure_compiler_jar=RequireOptimizer._resource_path("compiler.jar"),
+                                                                                                                  require_js=RequireOptimizer._resource_path("r.js"),
+                                                                                                                  base_url=base_url,
+                                                                                                                  name=name,
+                                                                                                                  require_output_path=output_path,
+                                                                                                                  require_extra_args=extra_arg_string)
 
         # Run the compiler.
         try:
