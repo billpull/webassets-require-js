@@ -11,7 +11,7 @@ class RequireJSFilter(Filter):
         self.kwargs = kwargs
 
     def unique(self):
-        return self.args, self.kwargs
+        return [self.args].extend([(k, v) for (k, v) in self.kwargs.items()])
 
     def setup(self):
         pass
