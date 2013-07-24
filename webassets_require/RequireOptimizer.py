@@ -10,6 +10,7 @@ class OptimizationError(Exception):
 class RequireOptimizer(object):
     __REQUIRE_RESOURCES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                               "lib"))
+    MB_MEMORY_FOR_JAVA = 256
 
     @staticmethod
     def _resource_path(file):
@@ -36,9 +37,10 @@ class RequireOptimizer(object):
         for key, value in extra_args.iteritems():
             extra_arg_string += "%s=%s " % (key, value)
 
-        compiler_cmd = "java -classpath {rhino_js_jar}:{closure_compiler_jar} " \
+        compiler_cmd = "java -Xmx{memory}m -classpath {rhino_js_jar}:{closure_compiler_jar} " \
                         "org.mozilla.javascript.tools.shell.Main {require_js} " \
-                        "-o baseUrl={base_url} name={name} out={require_output_path} {require_extra_args}".format(rhino_js_jar=RequireOptimizer._resource_path("js.jar"),
+                        "-o baseUrl={base_url} name={name} out={require_output_path} {require_extra_args}".format(memory=MB_MEMORY_FOR_JAVA,
+                                                                                                                  rhino_js_jar=RequireOptimizer._resource_path("js.jar"),
                                                                                                                   closure_compiler_jar=RequireOptimizer._resource_path("compiler.jar"),
                                                                                                                   require_js=RequireOptimizer._resource_path("r.js"),
                                                                                                                   base_url=base_url,
