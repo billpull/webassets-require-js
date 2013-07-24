@@ -9,6 +9,8 @@ This fork adds support for:
 - Specifying name parameter to r.js explicitly. If no name option is provided, the filter will now figure out the name based on the source path and the current working dir.
 - Passing additional arguments to r.js from the webassets bundle-definition. These arguments will be passed directly to r.js.
 
+Note: The filter will read the input file directly from disk (it will not use the _in variable), so it is recommended to use this filter as the first filter that is applied.
+
 Example usage:
 ```
 from webassets_require import RequireJSFilter
