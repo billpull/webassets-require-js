@@ -1,7 +1,7 @@
 webassets-require-js
 ====================
 
-A webassets filter for require js optimizer.
+A webassets filter for require js optimizer, forked from https://github.com/billpull/webassets-require-js.
 This fork adds support for:
 - File with dependencies. Gives r.js access to the original source file, so that it can follow and include dependencies.
 - No more hardcoded output. Instead the output path from the webassets bundle-definition is used.
@@ -9,7 +9,10 @@ This fork adds support for:
 - Specifying name parameter to r.js explicitly. If no name option is provided, the filter will now figure out the name based on the source path and the current working dir.
 - Passing additional arguments to r.js from the webassets bundle-definition. These arguments will be passed directly to r.js.
 
+Note: The filter will read the input file directly from disk (it will not use the _in variable), so it is recommended to use this filter as the first filter that is applied.
+
 Example usage:
+```
 from webassets_require import RequireJSFilter
 
 start_page_js = Bundle('js/pages/start_page.js',
@@ -20,6 +23,7 @@ start_page_js = Bundle('js/pages/start_page.js',
                                                            "optimize": "uglify2",
                                                            "pragmas.isBuild": "true"}),
                        output="static/js/pages/start_page.js")
-
+```
 Most of the work done by Naycon (https://github.com/Naycon).
+
 Branch maintaned by Zwant (https://github.com/Zwant)
